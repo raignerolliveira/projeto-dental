@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="h-full">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dental Santo Antônio | Pitch do Fundador (Modo Telão)</title>
+  
+  <!-- Fontes Google: Plus Jakarta Sans e JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800;900&family=JetBrains+Mono:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              primary: '#4338CA',    // Indigo profundo de altíssimo contraste
+              primaryDark: '#312E81',
+              accent: '#0891B2',     // Ciano vívido
+              emerald: '#059669',    // Verde nítido
+              coral: '#E11D48',      // Rosa/Coral de atenção
+              amber: '#D97706',      // Âmbar forte
+              surface: '#FFFFFF',
+              bgLight: '#F1F5F9',    // Fundo nítido para projetor
+              cardBg: '#FFFFFF',
+              borderLight: '#CBD5E1',
+              textMain: '#020617',   // Preto azulado profundo (leitura perfeita de longe)
+              textMuted: '#334155',
+            }
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #F1F5F9;
+      color: #020617;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      overflow: hidden;
+      user-select: none;
+    }
+
+    /* Fundo Nítido e Limpo para Telão / Projetor */
+    .bg-canvas {
+      background: radial-gradient(circle at 12% 12%, rgba(67, 56, 202, 0.08) 0%, transparent 45%),
+                  radial-gradient(circle at 88% 88%, rgba(8, 145, 178, 0.09) 0%, transparent 50%),
+                  #F8FAFC;
+    }
+
+    /* Transição Fluida */
+    .slide-container {
+      perspective: 1000px;
+    }
+
+    .slide {
+      opacity: 0;
+      transform: scale(0.97) translateY(10px);
+      pointer-events: none;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .slide.active {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+      pointer-events: auto;
+      position: relative;
+    }
+
+    /* Cartões de Alto Impacto para Auditório e Telão */
+    .telao-card {
+      background: #FFFFFF;
+      border: 2px solid #E2E8F0;
+      box-shadow: 0 12px 28px -6px rgba(15, 23, 42, 0.09), 0 8px 12px -6px rgba(15, 23, 42, 0.05);
+      transition: all 0.25s ease;
+    }
+
+    .telao-card:hover {
+      border-color: #94A3B8;
+      transform: translateY(-2px);
+      box-shadow: 0 20px 35px -8px rgba(67, 56, 202, 0.15);
+    }
+
+    /* Gaveta de Roteiro (Tecla P) */
+    #speaker-notes-panel {
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #94A3B8;
+      border-radius: 9999px;
+    }
+  </style>
+</head>
+<body class="h-screen w-screen bg-canvas flex flex-col justify-between overflow-hidden text-brand-textMain antialiased">
+
+  <!-- ======================================================== -->
+  <!-- BARRA DE TOPO: LEGÍVEL E ELEGANTE                        -->
+  <!-- ======================================================== -->
+  <header class="w-full z-40 px-6 py-3 flex items-center justify-between border-b-2 border-slate-200 bg-white/95 backdrop-blur-md shadow-sm">
+    
+    <!-- Identidade -->
+    <div class="flex items-center gap-3">
+      <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-brand-primary to-brand-accent p-0.5 shadow-md flex items-center justify-center shrink-0">
+        <div class="w-full h-full bg-white rounded-[10px] flex items-center justify-center">
+          <i data-lucide="store" class="w-6 h-6 text-brand-primary"></i>
+        </div>
+      </div>
+      <div>
+        <div class="flex items-center gap-2">
+          <span class="font-black text-slate-900 text-lg sm:text-xl tracking-tight">Dental Santo Antônio</span>
+          <span class="text-xs font-extrabold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-indigo-100 text-brand-primary border border-indigo-300">
+            Pitch do Fundador
+          </span>
+        </div>
+        <p class="text-xs sm:text-sm text-slate-600 font-bold">Da Experiência de Balcão à Tecnologia &middot; 3 a 5 min</p>
+      </div>
+    </div>
+
+    <!-- Progresso do Bloco -->
+    <div class="flex flex-col items-center">
+      <div class="flex items-center gap-2 mb-1">
+        <span id="slide-block-tag" class="text-xs uppercase font-mono font-extrabold tracking-wider text-brand-primary bg-indigo-100 px-3 py-0.5 rounded-full border border-indigo-200">
+          Capa
+        </span>
+        <span class="text-slate-400 font-mono text-xs">&middot;</span>
+        <span id="slide-current-index" class="font-mono text-base font-black text-slate-900">01</span>
+        <span class="text-slate-400 text-sm font-mono font-bold">/</span>
+        <span id="slide-total-count" class="font-mono text-sm text-slate-600 font-bold">05</span>
+      </div>
+      <div class="w-48 sm:w-64 h-2.5 bg-slate-200 rounded-full overflow-hidden border border-slate-300">
+        <div id="progress-bar" class="h-full bg-gradient-to-r from-brand-primary to-brand-accent transition-all duration-300 w-[20%]"></div>
+      </div>
+    </div>
+
+    <!-- Ferramentas do Orador -->
+    <div class="flex items-center gap-2.5">
+      <!-- Cronômetro com fonte maior -->
+      <div id="timer-box" class="flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-slate-100 border-2 border-slate-300 text-sm font-mono font-black text-slate-800 shadow-inner">
+        <i data-lucide="clock" class="w-4 h-4 text-brand-primary" id="timer-icon"></i>
+        <span id="pitch-timer" class="text-base">00:00</span>
+        <button id="timer-reset" title="Reiniciar cronômetro" class="text-slate-400 hover:text-slate-800 transition ml-1">
+          <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
+        </button>
+      </div>
+
+      <!-- Botão Roteiro (P) -->
+      <button id="btn-notes" title="Abrir Roteiro (Tecla P)" class="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-white hover:bg-slate-50 border-2 border-slate-300 hover:border-brand-primary text-slate-800 text-xs sm:text-sm font-bold shadow-sm transition">
+        <i data-lucide="notebook" class="w-4 h-4 text-brand-primary"></i>
+        <span class="hidden sm:inline">Roteiro (P)</span>
+      </button>
+
+      <!-- Botão Atalhos (?) -->
+      <button id="btn-help" title="Atalhos do Teclado (Tecla ?)" class="w-9 h-9 rounded-xl bg-white hover:bg-slate-50 border-2 border-slate-300 text-slate-800 flex items-center justify-center shadow-sm transition">
+        <i data-lucide="help-circle" class="w-4 h-4"></i>
+      </button>
+
+      <!-- Botão Tela Cheia (F) -->
+      <button id="btn-fullscreen" title="Tela Cheia (Tecla F)" class="w-9 h-9 rounded-xl bg-white hover:bg-slate-50 border-2 border-slate-300 text-slate-800 flex items-center justify-center shadow-sm transition">
+        <i data-lucide="maximize" class="w-4 h-4"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- ======================================================== -->
+  <!-- ÁREA CENTRAL DOS SLIDES COM FONTES GRANDES PARA TELÃO    -->
+  <!-- ======================================================== -->
+  <main class="relative flex-1 w-full max-w-6xl mx-auto px-6 sm:px-10 py-3 flex items-center justify-center overflow-hidden slide-container">
+
+    <!-- ---------------------------------------------------- -->
+    <!-- SLIDE 1: CAPA & VISÃO GERAL (FONTE TELÃO)            -->
+    <!-- ---------------------------------------------------- -->
+    <section class="slide active" data-slide="1" data-block="Capa" data-ideal-time="45s"
+      data-notes="Olá a todos. O projeto que apresento hoje não nasceu de uma simulação hipotética. Ele nasceu da minha vivência real como funcionário na Dental Santo Antônio. Eu estive atrás daquele balcão e vivi o gargalo de atender clientes físicos e responder cotações no WhatsApp ao mesmo tempo. Hoje, no setor de tecnologia, criei a solução que nós precisávamos desesperadamente naquela época.">
+      
+      <div class="w-full text-center space-y-6">
+        
+        <div class="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-emerald-100 border-2 border-emerald-300 text-emerald-900 text-sm sm:text-base font-extrabold tracking-wide shadow-sm">
+          <span class="w-2.5 h-2.5 rounded-full bg-emerald-600 animate-ping"></span>
+          <span>CASO REAL &middot; DE EX-ATENDENTE A FUNDADOR</span>
+        </div>
+
+        <div class="space-y-3">
+          <h1 class="text-5xl sm:text-7xl font-black text-slate-900 tracking-tight leading-none">
+            Dental Santo Antônio
+          </h1>
+          <p class="text-2xl sm:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-brand-primary via-indigo-700 to-brand-accent">
+            A Solução que Eu Queria Ter no Balcão da Loja
+          </p>
+        </div>
+
+        <!-- 4 Tópicos Diretos de Roteiro em Destaque -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-5xl mx-auto pt-2 text-left">
+          
+          <div class="telao-card p-5 rounded-2xl border-t-8 border-t-amber-500">
+            <div class="text-amber-700 font-mono text-sm font-black mb-1">01. A FAÍSCA</div>
+            <div class="font-black text-slate-900 text-lg sm:text-xl leading-tight">O Caos da Loja</div>
+            <p class="text-sm sm:text-base text-slate-700 mt-2 font-semibold">2 pessoas no balcão vs. centenas de pedidos.</p>
+          </div>
+
+          <div class="telao-card p-5 rounded-2xl border-t-8 border-t-brand-primary">
+            <div class="text-brand-primary font-mono text-sm font-black mb-1">02. O MARCO</div>
+            <div class="font-black text-slate-900 text-lg sm:text-xl leading-tight">A Virada Técnica</div>
+            <p class="text-sm sm:text-base text-slate-700 mt-2 font-semibold">Engenharia anti-perda e compliance Anvisa.</p>
+          </div>
+
+          <div class="telao-card p-5 rounded-2xl border-t-8 border-t-cyan-500">
+            <div class="text-cyan-700 font-mono text-sm font-black mb-1">03. A ASSINATURA</div>
+            <div class="font-black text-slate-900 text-lg sm:text-xl leading-tight">O Toque Humano</div>
+            <p class="text-sm sm:text-base text-slate-700 mt-2 font-semibold">Aluno acolhido & cotação em 1 clique.</p>
+          </div>
+
+          <div class="telao-card p-5 rounded-2xl border-t-8 border-t-emerald-500">
+            <div class="text-emerald-700 font-mono text-sm font-black mb-1">04. O PITCH</div>
+            <div class="font-black text-slate-900 text-lg sm:text-xl leading-tight">Impacto & Teste</div>
+            <p class="text-sm sm:text-base text-slate-700 mt-2 font-semibold">De 45 para 2 minutos + QR Code ao vivo.</p>
+          </div>
+
+        </div>
+
+        <div class="pt-2 text-sm sm:text-base font-mono font-bold text-slate-600 flex items-center justify-center gap-2">
+          <span>Avançar: <kbd class="px-2 py-1 bg-slate-200 border border-slate-300 rounded text-slate-900 font-black">→</kbd> ou <kbd class="px-2 py-1 bg-slate-200 border border-slate-300 rounded text-slate-900 font-black">Espaço</kbd></span>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ---------------------------------------------------- -->
+    <!-- SLIDE 2: BLOCO 1 - A FAÍSCA (A VIVÊNCIA REAL)       -->
+    <!-- ---------------------------------------------------- -->
+    <section class="slide" data-slide="2" data-block="1. A Faísca" data-ideal-time="60s"
+      data-notes="BLOCO 1 - A FAÍSCA: Eu vivi isso na pele. Éramos apenas duas pessoas para cuidar de uma loja inteira da Dental Santo Antônio. Enquanto os alunos de odontologia chegavam correndo entre uma aula e outra no balcão para cotar listas enormes, os dentistas que estavam no consultório ficavam mandando mensagens no WhatsApp desesperados por preços e produtos. A gente simplesmente não dava conta! Ou a gente atendia quem estava na nossa frente, ou a gente parava tudo para calcular cotação no WhatsApp. As mensagens demoravam horas para serem respondidas, gerando estresse e perda de vendas.">
+      
+      <div class="w-full space-y-4">
+        
+        <div class="space-y-1">
+          <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-100 text-amber-900 text-sm font-black">
+            <i data-lucide="flame" class="w-4 h-4"></i> BLOCO 1: O PROBLEMA REAL DO BALCÃO
+          </div>
+          <h2 class="text-4xl sm:text-5xl font-black text-slate-900 tracking-tight">
+            A Faísca: 2 Pessoas na Loja & Um Gargalo Diário
+          </h2>
+        </div>
+
+        <!-- 3 Cartões Grandes com Fontes Legíveis de Longe -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5 pt-1">
+          
+          <div class="telao-card p-6 rounded-2xl border-l-8 border-l-amber-500 space-y-3">
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 rounded-xl bg-amber-100 flex items-center justify-center text-amber-700 shrink-0">
+                <i data-lucide="users-2" class="w-6 h-6"></i>
+              </div>
+              <h3 class="text-xl sm:text-2xl font-black text-slate-900 leading-tight">Apenas 2 Pessoas</h3>
+            </div>
+            <ul class="text-base sm:text-lg text-slate-800 space-y-2.5 font-bold pt-1">
+              <li class="flex items-start gap-2.5">
+                <span class="w-2.5 h-2.5 rounded-full bg-amber-500 mt-2 shrink-0"></span>
+                <span>Equipe pequena para demanda altíssima</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="w-2.5 h-2.5 rounded-full bg-amber-500 mt-2 shrink-0"></span>
+                <span>Balcão físico sempre com fila</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="w-2.5 h-2.5 rounded-full bg-amber-500 mt-2 shrink-0"></span>
+                <span>Impossível fazer duas coisas ao mesmo tempo</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="telao-card p-6 rounded-2xl border-l-8 border-l-rose-500 space-y-3">
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 rounded-xl bg-rose-100 flex items-center justify-center text-rose-700 shrink-0">
+                <i data-lucide="message-circle" class="w-6 h-6"></i>
+              </div>
+              <h3 class="text-xl sm:text-2xl font-black text-slate-900 leading-tight">Dentistas no Zap</h3>
+            </div>
+            <ul class="text-base sm:text-lg text-slate-800 space-y-2.5 font-bold pt-1">
+              <li class="flex items-start gap-2.5">
+                <span class="w-2.5 h-2.5 rounded-full bg-rose-500 mt-2 shrink-0"></span>
+                <span>Mensagens acumuladas sem resposta</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="w-2.5 h-2.5 rounded-full bg-rose-500 mt-2 shrink-0"></span>
+                <span>Dentista no consultório precisando com pressa</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="w-2.5 h-2.5 rounded-full bg-rose-500 mt-2 shrink-0"></span>
+                <span>Vendas perdidas pela demora na cotação</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="telao-card p-6 rounded-2xl border-l-8 border-l-brand-primary space-y-3">
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 rounded-xl bg-indigo-100 flex items-center justify-center text-brand-primary shrink-0">
+                <i data-lucide="graduation-cap" class="w-6 h-6"></i>
+              </div>
+              <h3 class="text-xl sm:text-2xl font-black text-slate-900 leading-tight">Alunos com Pressa</h3>
+            </div>
+            <ul class="text-base sm:text-lg text-slate-800 space-y-2.5 font-bold pt-1">
+              <li class="flex items-start gap-2.5">
+                <span class="w-2.5 h-2.5 rounded-full bg-brand-primary mt-2 shrink-0"></span>
+                <span>Listas imensas de semestres acadêmicos</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="w-2.5 h-2.5 rounded-full bg-brand-primary mt-2 shrink-0"></span>
+                <span>Intervalos curtos entre aulas da faculdade</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="w-2.5 h-2.5 rounded-full bg-brand-primary mt-2 shrink-0"></span>
+                <span>Cálculo manual item a item travava a loja</span>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+
+        <!-- Banner de Síntese em Destaque -->
+        <div class="p-4 bg-indigo-100/80 border-2 border-indigo-300 rounded-2xl flex items-center justify-between text-base sm:text-lg">
+          <div class="flex items-center gap-3 font-black text-slate-900">
+            <i data-lucide="check-circle-2" class="w-6 h-6 text-brand-primary shrink-0"></i>
+            <span>A Decisão: Automatizar o orçamento para liberar o atendente e atender o WhatsApp na hora.</span>
+          </div>
+          <span class="font-mono text-brand-primary font-black text-sm uppercase hidden md:inline bg-white px-3 py-1 rounded-lg border border-indigo-200">
+            Dor 100% Real
+          </span>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ---------------------------------------------------- -->
+    <!-- SLIDE 3: BLOCO 2 - O MARCO (A VIRADA TÉCNICA)        -->
+    <!-- ---------------------------------------------------- -->
+    <section class="slide" data-slide="3" data-block="2. O Marco" data-ideal-time="75s"
+      data-notes="BLOCO 2 - O MARCO: O tempo passou e eu entrei para o ramo da tecnologia. Quando olhei para trás, vi a oportunidade perfeita de resolver essa dor com código moderno. Meu maior desafio como desenvolvedor foi construir um sistema que não falhasse na mão de quem tem pressa. Criei um hook resiliente de LocalStorage para que o carrinho nunca seja perdido se a aba fechar, uma busca com debounce super leve e a verificação automática de conformidade da Anvisa. Deixar de ser quem sofria no balcão para ser quem programa a solução foi o meu maior marco de maturidade profissional.">
+      
+      <div class="w-full space-y-4">
+        
+        <div class="space-y-1">
+          <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-100 text-indigo-900 text-sm font-black">
+            <i data-lucide="cpu" class="w-4 h-4"></i> BLOCO 2: ENGENHARIA DE SOFTWARE APLICADA
+          </div>
+          <h2 class="text-4xl sm:text-5xl font-black text-slate-900 tracking-tight">
+            O Marco: Da Dor Operacional à Arquitetura Resiliente
+          </h2>
+        </div>
+
+        <!-- 3 Pilares Técnicos -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5 pt-1">
+          
+          <div class="telao-card p-6 rounded-2xl border-t-8 border-t-cyan-500 space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-black text-cyan-800 bg-cyan-100 px-2.5 py-1 rounded-md">01. PERSISTÊNCIA</span>
+              <i data-lucide="hard-drive" class="w-5 h-5 text-cyan-600"></i>
+            </div>
+            <h3 class="text-xl sm:text-2xl font-black text-slate-900 leading-tight">Carrinho Anti-Perda</h3>
+            <ul class="text-base sm:text-lg text-slate-800 space-y-2 font-bold pt-1">
+              <li>• Sincronização multi-abas em tempo real</li>
+              <li>• Cliente pode fechar a aba ou dar F5 sem perder nada</li>
+              <li>• Proteção contra modo anônimo</li>
+            </ul>
+          </div>
+
+          <div class="telao-card p-6 rounded-2xl border-t-8 border-t-brand-primary space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-black text-indigo-800 bg-indigo-100 px-2.5 py-1 rounded-md">02. PERFORMANCE</span>
+              <i data-lucide="zap" class="w-5 h-5 text-brand-primary"></i>
+            </div>
+            <h3 class="text-xl sm:text-2xl font-black text-slate-900 leading-tight">Busca Instantânea</h3>
+            <ul class="text-base sm:text-lg text-slate-800 space-y-2 font-bold pt-1">
+              <li>• Debounce a 60fps sem travar o celular</li>
+              <li>• Filtros rápidos por especialidades odonto</li>
+              <li>• Resposta imediata para listas grandes</li>
+            </ul>
+          </div>
+
+          <div class="telao-card p-6 rounded-2xl border-t-8 border-t-emerald-500 space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-black text-emerald-800 bg-emerald-100 px-2.5 py-1 rounded-md">03. COMPLIANCE</span>
+              <i data-lucide="shield-check" class="w-5 h-5 text-emerald-600"></i>
+            </div>
+            <h3 class="text-xl sm:text-2xl font-black text-slate-900 leading-tight">Blindagem Anvisa</h3>
+            <ul class="text-base sm:text-lg text-slate-800 space-y-2 font-bold pt-1">
+              <li>• Identificação automática de anestésicos</li>
+              <li>• Injeção de termo legal sanitário no resumo</li>
+              <li>• Zero risco de autuações e multas</li>
+            </ul>
+          </div>
+
+        </div>
+
+        <div class="p-4 bg-slate-100 border-2 border-slate-300 rounded-2xl flex flex-wrap items-center justify-between gap-3 text-sm sm:text-base font-mono font-bold text-slate-700">
+          <span>React 18 &middot; Vite &middot; TypeScript Strict Mode</span>
+          <span class="text-emerald-700 font-black">✓ Hospedagem: R$ 0,00 (Jamstack no Vercel)</span>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ---------------------------------------------------- -->
+    <!-- SLIDE 4: BLOCO 3 - A ASSINATURA (DIFERENCIAL HUMANO) -->
+    <!-- ---------------------------------------------------- -->
+    <section class="slide" data-slide="4" data-block="3. A Assinatura" data-ideal-time="75s"
+      data-notes="BLOCO 3 - A ASSINATURA: O que diferencia o meu projeto de qualquer e-commerce de prateleira? A empatia que só quem trabalhou no balcão tem. Primeiro: nós não barramos o estudante de odontologia exigindo CRO, coisa que os outros sites fazem. Criamos um perfil exclusivo onde ele informa faculdade e matrícula e monta a lista sem dor de cabeça. Segundo: o protocolo temporal único #COT, que acaba com o bate-boca no WhatsApp e organiza a fila do vendedor. E terceiro: o botão de contingência que copia o orçamento caso o celular bloqueie o WhatsApp.">
+      
+      <div class="w-full space-y-4">
+        
+        <div class="space-y-1">
+          <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-100 text-cyan-900 text-sm font-black">
+            <i data-lucide="sparkles" class="w-4 h-4"></i> BLOCO 3: OS DIFERENCIAIS DE QUEM CONHECE A ROTINA
+          </div>
+          <h2 class="text-4xl sm:text-5xl font-black text-slate-900 tracking-tight">
+            A Assinatura: Acolher o Estudante & Organizar o WhatsApp
+          </h2>
+        </div>
+
+        <!-- 3 Assinaturas com Tipografia Forte -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5 pt-1">
+          
+          <div class="telao-card p-6 rounded-2xl border-t-8 border-t-pink-500 space-y-3">
+            <div class="w-12 h-12 rounded-xl bg-pink-100 text-pink-700 flex items-center justify-center">
+              <i data-lucide="smile" class="w-6 h-6"></i>
+            </div>
+            <h3 class="text-xl sm:text-2xl font-black text-slate-900 leading-tight">Inclusão do Acadêmico</h3>
+            <ul class="text-base sm:text-lg text-slate-800 space-y-2 font-bold pt-1">
+              <li>• <strong>Sem barreira de CRO:</strong> apenas Faculdade e Semestre</li>
+              <li>• Aluno cota a lista de materiais sem depender de professor</li>
+              <li>• Fideliza o futuro dentista no começo da graduação</li>
+            </ul>
+          </div>
+
+          <div class="telao-card p-6 rounded-2xl border-t-8 border-t-brand-primary space-y-3">
+            <div class="w-12 h-12 rounded-xl bg-indigo-100 text-brand-primary flex items-center justify-center">
+              <i data-lucide="tag" class="w-6 h-6"></i>
+            </div>
+            <h3 class="text-xl sm:text-2xl font-black text-slate-900 leading-tight">Protocolo #COT</h3>
+            <ul class="text-base sm:text-lg text-slate-800 space-y-2 font-bold pt-1">
+              <li>• Código rastreável único: <code class="text-brand-primary font-black">#COT-DATA-HASH</code></li>
+              <li>• O vendedor sabe exatamente qual pedido faturar</li>
+              <li>• Fim das mensagens soltas e confusas no WhatsApp</li>
+            </ul>
+          </div>
+
+          <div class="telao-card p-6 rounded-2xl border-t-8 border-t-emerald-500 space-y-3">
+            <div class="w-12 h-12 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center">
+              <i data-lucide="clipboard-check" class="w-6 h-6"></i>
+            </div>
+            <h3 class="text-xl sm:text-2xl font-black text-slate-900 leading-tight">Contingência em 1 Clique</h3>
+            <ul class="text-base sm:text-lg text-slate-800 space-y-2 font-bold pt-1">
+              <li>• WhatsApp travou popup? Botão copia a mensagem completa</li>
+              <li>• Orçamento discriminado com subtotais prontos</li>
+              <li>• Zero vendas perdidas por falha de navegador</li>
+            </ul>
+          </div>
+
+        </div>
+
+        <div class="p-3.5 bg-white border-2 border-slate-300 rounded-2xl text-center text-base sm:text-lg text-slate-800 font-extrabold shadow-sm">
+          💡 <em>"A tecnologia foi desenhada para servir à realidade do balcão, não para criar novas barreiras."</em>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ---------------------------------------------------- -->
+    <!-- SLIDE 5: BLOCO 4 - FECHAMENTO & TESTE AO VIVO        -->
+    <!-- ---------------------------------------------------- -->
+    <section class="slide" data-slide="5" data-block="4. O Fechamento" data-ideal-time="60s"
+      data-notes="BLOCO 4 - FECHAMENTO E LIVE DEMO: Concluo dizendo que este projeto não é apenas código no GitHub. Ele está em produção, hospedado no Vercel e pronto para resolver o gargalo da Dental Santo Antônio agora. Reduzimos o tempo de atendimento de 45 minutos para apenas 2 minutos. O vendedor recebe o pedido mastigado, e o dentista não precisa esperar a loja esvaziar para ser atendido. Convido todos a apontarem a câmera do celular para este QR Code e testarem agora mesmo no Vercel. Muito obrigado!">
+      
+      <div class="w-full space-y-4">
+        
+        <div class="text-center space-y-1">
+          <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-100 text-emerald-900 text-sm font-black">
+            <i data-lucide="rocket" class="w-4 h-4"></i> BLOCO 4: TESTE AO VIVO & PROPOSTA DE VALOR
+          </div>
+          <h2 class="text-4xl sm:text-5xl font-black text-slate-900 tracking-tight">
+            Em Produção: Teste Agora no Celular
+          </h2>
+        </div>
+
+        <!-- Painel Central com QR Code Grande e Fontes Legíveis -->
+        <div class="telao-card p-6 rounded-3xl max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+          
+          <!-- Lado Esquerdo: QR Code Grande -->
+          <div class="flex flex-col items-center justify-center p-5 bg-slate-50 rounded-2xl border-2 border-slate-200 text-center space-y-3.5">
+            <div class="p-3 bg-white rounded-2xl shadow-md border-2 border-slate-300 inline-block">
+              <img 
+                src="https://api.qrserver.com/v1/create-qr-code/?size=260x260&data=https://projeto-dental.vercel.app/&color=020617" 
+                alt="QR Code do Projeto Dental" 
+                class="w-44 h-44 sm:w-56 sm:h-56 object-contain rounded-xl"
+              />
+            </div>
+
+            <div class="space-y-1.5">
+              <span class="text-sm sm:text-base font-black text-slate-900 block">Aponte a câmera do celular</span>
+              <a href="https://projeto-dental.vercel.app/" target="_blank" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-brand-primary text-white font-mono text-sm sm:text-base font-black hover:bg-brand-primaryDark shadow-md transition">
+                <span>projeto-dental.vercel.app</span>
+                <i data-lucide="external-link" class="w-4 h-4"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Lado Direito: Resultados Tangíveis do Fundador -->
+          <div class="space-y-4 text-left">
+            <div>
+              <span class="text-sm font-mono text-brand-primary font-black uppercase tracking-wider">Resultado Real</span>
+              <h4 class="text-2xl sm:text-3xl font-black text-slate-900 leading-tight">De 45 Minutos para 2 Minutos</h4>
+              <p class="text-base sm:text-lg text-slate-700 font-bold mt-1">
+                O cliente cota sozinho, a loja não para e o vendedor recebe pronto para faturar.
+              </p>
+            </div>
+
+            <div class="space-y-3 text-base sm:text-lg font-black text-slate-900">
+              <div class="flex items-center gap-3 p-3 bg-emerald-100 rounded-xl text-emerald-950 border-2 border-emerald-300">
+                <i data-lucide="check-circle-2" class="w-6 h-6 text-emerald-700 shrink-0"></i>
+                <span>Desafogou os 2 atendentes do balcão</span>
+              </div>
+              <div class="flex items-center gap-3 p-3 bg-indigo-100 rounded-xl text-indigo-950 border-2 border-indigo-300">
+                <i data-lucide="check-circle-2" class="w-6 h-6 text-brand-primary shrink-0"></i>
+                <span>Atende dentistas no WhatsApp sem espera</span>
+              </div>
+              <div class="flex items-center gap-3 p-3 bg-cyan-100 rounded-xl text-cyan-950 border-2 border-cyan-300">
+                <i data-lucide="check-circle-2" class="w-6 h-6 text-cyan-700 shrink-0"></i>
+                <span>Alunos montam listas no intervalo das aulas</span>
+              </div>
+            </div>
+
+            <div class="pt-1">
+              <p class="text-sm sm:text-base text-slate-600 font-black">Muito obrigado! Aberto para perguntas da banca.</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ======================================================== -->
+  <!-- BARRA INFERIOR: NAVEGAÇÃO & MINIS DOS SLIDES             -->
+  <!-- ======================================================== -->
+  <footer class="w-full z-40 px-6 py-3 flex items-center justify-between border-t-2 border-slate-200 bg-white/95 backdrop-blur-md">
+    
+    <!-- Miniaturas de Slides Rápidos -->
+    <div class="flex items-center gap-2" id="slide-indicators-container"></div>
+
+    <!-- Dica de Tempo Ideal do Slide -->
+    <div class="hidden md:flex items-center gap-2 text-sm text-slate-600 font-mono font-bold">
+      <i data-lucide="hourglass" class="w-4 h-4 text-amber-600"></i>
+      <span>Tempo recomendado no bloco: <strong id="ideal-time-badge" class="text-slate-950 font-black">45s</strong></span>
+    </div>
+
+    <!-- Botões de Navegação -->
+    <div class="flex items-center gap-2.5">
+      <button id="btn-prev" class="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 border-2 border-slate-300 text-slate-800 transition disabled:opacity-40 disabled:cursor-not-allowed text-xs sm:text-sm font-black">
+        <i data-lucide="chevron-left" class="w-4 h-4"></i>
+        <span>Anterior</span>
+      </button>
+
+      <button id="btn-next" class="flex items-center gap-1.5 px-6 py-2 rounded-xl bg-brand-primary hover:bg-brand-primaryDark text-white transition shadow-md shadow-brand-primary/25 disabled:opacity-40 disabled:cursor-not-allowed text-xs sm:text-sm font-black">
+        <span>Próximo</span>
+        <i data-lucide="chevron-right" class="w-4 h-4"></i>
+      </button>
+    </div>
+  </footer>
+
+  <!-- ======================================================== -->
+  <!-- PAINEL MODAL: ROTEIRO COM A MINHA HISTÓRIA (TECLA P)    -->
+  <!-- ======================================================== -->
+  <aside id="speaker-notes-panel" class="fixed right-0 top-0 bottom-0 w-96 max-w-[90vw] z-50 bg-white border-l-2 border-slate-300 p-6 flex flex-col justify-between translate-x-full shadow-2xl">
+    <div class="space-y-4">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-200">
+        <div class="flex items-center gap-2">
+          <i data-lucide="mic" class="w-5 h-5 text-brand-primary"></i>
+          <h3 class="font-black text-slate-900 text-base">Meu Roteiro (Vivência Real)</h3>
+        </div>
+        <button id="btn-close-notes" class="text-slate-400 hover:text-slate-800 transition">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <div class="space-y-1">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-mono text-brand-primary uppercase tracking-wider font-black">Slide Atual</span>
+          <span id="notes-ideal-time" class="text-xs font-mono text-amber-900 bg-amber-100 px-2.5 py-0.5 rounded border border-amber-300 font-black">Meta: 45s</span>
+        </div>
+        <div id="notes-slide-title" class="text-base font-black text-slate-900">1. Capa & Visão Geral</div>
+      </div>
+
+      <div class="space-y-2">
+        <div class="text-xs font-mono text-slate-600 uppercase tracking-wider font-black">O que falar (Norte Mental):</div>
+        <div id="notes-content" class="text-sm text-slate-800 leading-relaxed p-4 rounded-xl bg-slate-50 border-2 border-slate-200 max-h-[50vh] overflow-y-auto space-y-2 font-semibold">
+          Texto do roteiro...
+        </div>
+      </div>
+    </div>
+
+    <div class="pt-4 border-t border-slate-200 text-xs text-slate-600 space-y-1 font-bold">
+      <p class="flex items-center gap-1.5">
+        <i data-lucide="info" class="w-4 h-4 text-brand-primary"></i>
+        <span><em>Dica: Pressione <strong>P</strong> para abrir ou ocultar suas notas.</em></span>
+      </p>
+    </div>
+  </aside>
+
+  <!-- ======================================================== -->
+  <!-- MODAL DE ATALHOS (?)                                     -->
+  <!-- ======================================================== -->
+  <div id="shortcuts-modal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center hidden opacity-0 transition-opacity duration-200">
+    <div class="bg-white p-6 rounded-3xl max-w-md w-full mx-4 space-y-4 border-2 border-slate-300 shadow-2xl">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-200">
+        <div class="flex items-center gap-2">
+          <i data-lucide="keyboard" class="w-6 h-6 text-brand-primary"></i>
+          <h3 class="font-black text-slate-900 text-lg">Atalhos da Apresentação</h3>
+        </div>
+        <button id="btn-close-shortcuts" class="text-slate-400 hover:text-slate-800 transition">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <div class="grid grid-cols-2 gap-3 text-xs sm:text-sm">
+        <div class="flex items-center justify-between p-3 rounded-xl bg-slate-50 border border-slate-200">
+          <span class="text-slate-800 font-bold">Avançar</span>
+          <kbd class="px-2 py-1 rounded bg-indigo-100 text-brand-primary font-mono font-black">Setas / Espaço</kbd>
+        </div>
+        <div class="flex items-center justify-between p-3 rounded-xl bg-slate-50 border border-slate-200">
+          <span class="text-slate-800 font-bold">Voltar</span>
+          <kbd class="px-2 py-1 rounded bg-indigo-100 text-brand-primary font-mono font-black">← / Backspace</kbd>
+        </div>
+        <div class="flex items-center justify-between p-3 rounded-xl bg-slate-50 border border-slate-200">
+          <span class="text-slate-800 font-bold">Tela Cheia</span>
+          <kbd class="px-2 py-1 rounded bg-indigo-100 text-brand-primary font-mono font-black">F</kbd>
+        </div>
+        <div class="flex items-center justify-between p-3 rounded-xl bg-slate-50 border border-slate-200">
+          <span class="text-slate-800 font-bold">Meu Roteiro</span>
+          <kbd class="px-2 py-1 rounded bg-indigo-100 text-brand-primary font-mono font-black">P</kbd>
+        </div>
+        <div class="flex items-center justify-between p-3 rounded-xl bg-slate-50 border border-slate-200">
+          <span class="text-slate-800 font-bold">Início / Fim</span>
+          <kbd class="px-2 py-1 rounded bg-indigo-100 text-brand-primary font-mono font-black">Home / End</kbd>
+        </div>
+        <div class="flex items-center justify-between p-3 rounded-xl bg-slate-50 border border-slate-200">
+          <span class="text-slate-800 font-bold">Fechar Janelas</span>
+          <kbd class="px-2 py-1 rounded bg-indigo-100 text-brand-primary font-mono font-black">Esc</kbd>
+        </div>
+      </div>
+
+      <div class="pt-2 text-center">
+        <button id="btn-ok-shortcuts" class="w-full py-3 rounded-xl bg-brand-primary hover:bg-brand-primaryDark text-white font-black text-sm transition shadow-sm">
+          Pronto para Apresentar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- SCRIPT DE NAVEGAÇÃO, CONTROLE & TEMPO                    -->
+  <!-- ======================================================== -->
+  <script>
+    lucide.createIcons();
+
+    let currentSlide = 1;
+    const slides = document.querySelectorAll('.slide');
+    const totalSlides = slides.length;
+    let isNotesOpen = false;
+
+    const blockData = [
+      { name: "Capa & Origem", tag: "Capa", idealTime: "45s" },
+      { name: "1. A Faísca (O Caos do Balcão)", tag: "A Faísca", idealTime: "60s" },
+      { name: "2. O Marco (A Virada Técnica)", tag: "O Marco", idealTime: "75s" },
+      { name: "3. A Assinatura (O Diferencial)", tag: "Assinatura", idealTime: "75s" },
+      { name: "4. O Fechamento (Teste ao Vivo)", tag: "Fechamento", idealTime: "60s" }
+    ];
+
+    const currentIndexEl = document.getElementById('slide-current-index');
+    const totalCountEl = document.getElementById('slide-total-count');
+    const progressBar = document.getElementById('progress-bar');
+    const slideBlockTag = document.getElementById('slide-block-tag');
+    const idealTimeBadge = document.getElementById('ideal-time-badge');
+    const btnPrev = document.getElementById('btn-prev');
+    const btnNext = document.getElementById('btn-next');
+    const indicatorsContainer = document.getElementById('slide-indicators-container');
+
+    const notesPanel = document.getElementById('speaker-notes-panel');
+    const btnNotes = document.getElementById('btn-notes');
+    const btnCloseNotes = document.getElementById('btn-close-notes');
+    const notesTitleEl = document.getElementById('notes-slide-title');
+    const notesContentEl = document.getElementById('notes-content');
+    const notesIdealTime = document.getElementById('notes-ideal-time');
+
+    const pitchTimerEl = document.getElementById('pitch-timer');
+    const timerResetBtn = document.getElementById('timer-reset');
+    const timerBox = document.getElementById('timer-box');
+    const timerIcon = document.getElementById('timer-icon');
+    let timerSeconds = 0;
+    let timerInterval = null;
+
+    function startTimer() {
+      if (timerInterval) return;
+      timerInterval = setInterval(() => {
+        timerSeconds++;
+        const mins = Math.floor(timerSeconds / 60).toString().padStart(2, '0');
+        const secs = (timerSeconds % 60).toString().padStart(2, '0');
+        pitchTimerEl.textContent = `${mins}:${secs}`;
+
+        // Alerta visual de ritmo (3 a 5 minutos):
+        if (timerSeconds >= 180 && timerSeconds <= 300) {
+          timerBox.className = "flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-emerald-100 border-2 border-emerald-400 text-sm font-mono font-black text-emerald-900 shadow-inner";
+          timerIcon.className = "w-4 h-4 text-emerald-700";
+        } else if (timerSeconds > 300) {
+          timerBox.className = "flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-rose-100 border-2 border-rose-400 text-sm font-mono font-black text-rose-900 shadow-inner animate-pulse";
+          timerIcon.className = "w-4 h-4 text-rose-700";
+        }
+      }, 1000);
+    }
+
+    function resetTimer() {
+      timerSeconds = 0;
+      pitchTimerEl.textContent = "00:00";
+      timerBox.className = "flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-slate-100 border-2 border-slate-300 text-sm font-mono font-black text-slate-800 shadow-inner";
+      timerIcon.className = "w-4 h-4 text-brand-primary";
+    }
+
+    timerResetBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      resetTimer();
+    });
+
+    window.addEventListener('click', startTimer, { once: true });
+    window.addEventListener('keydown', startTimer, { once: true });
+
+    function buildIndicators() {
+      indicatorsContainer.innerHTML = '';
+      slides.forEach((_, idx) => {
+        const num = idx + 1;
+        const btn = document.createElement('button');
+        const isActive = num === currentSlide;
+        btn.className = `px-3 py-1.5 rounded-xl text-xs sm:text-sm font-mono font-black transition flex items-center gap-1.5 ${
+          isActive 
+            ? 'bg-brand-primary text-white shadow-md' 
+            : 'bg-slate-100 text-slate-700 hover:text-slate-900 hover:bg-slate-200 border border-slate-300'
+        }`;
+        btn.innerHTML = `<span>${num}</span><span class="hidden lg:inline text-xs font-sans font-bold">${blockData[idx].tag}</span>`;
+        btn.title = blockData[idx].name;
+        btn.addEventListener('click', () => goToSlide(num));
+        indicatorsContainer.appendChild(btn);
+      });
+    }
+
+    function updateSlideUI() {
+      slides.forEach((slide, index) => {
+        if (index + 1 === currentSlide) {
+          slide.classList.add('active');
+        } else {
+          slide.classList.remove('active');
+        }
+      });
+
+      currentIndexEl.textContent = currentSlide.toString().padStart(2, '0');
+      totalCountEl.textContent = totalSlides.toString().padStart(2, '0');
+      slideBlockTag.textContent = blockData[currentSlide - 1].tag;
+      idealTimeBadge.textContent = blockData[currentSlide - 1].idealTime;
+
+      const progressPercent = (currentSlide / totalSlides) * 100;
+      progressBar.style.width = `${progressPercent}%`;
+
+      btnPrev.disabled = currentSlide === 1;
+      btnNext.disabled = currentSlide === totalSlides;
+      if (currentSlide === totalSlides) {
+        btnNext.innerHTML = `<span>Concluir</span> <i data-lucide="check-check" class="w-4 h-4"></i>`;
+      } else {
+        btnNext.innerHTML = `<span>Próximo</span> <i data-lucide="chevron-right" class="w-4 h-4"></i>`;
+      }
+      lucide.createIcons();
+
+      buildIndicators();
+
+      const activeSlideEl = document.querySelector(`.slide[data-slide="${currentSlide}"]`);
+      if (activeSlideEl) {
+        notesTitleEl.textContent = blockData[currentSlide - 1].name;
+        notesIdealTime.textContent = `Meta: ${blockData[currentSlide - 1].idealTime}`;
+        notesContentEl.textContent = activeSlideEl.dataset.notes || "Sem notas.";
+      }
+    }
+
+    function goToSlide(target) {
+      if (target < 1 || target > totalSlides) return;
+      currentSlide = target;
+      updateSlideUI();
+    }
+
+    function nextSlide() {
+      if (currentSlide < totalSlides) goToSlide(currentSlide + 1);
+    }
+
+    function prevSlide() {
+      if (currentSlide > 1) goToSlide(currentSlide - 1);
+    }
+
+    btnNext.addEventListener('click', nextSlide);
+    btnPrev.addEventListener('click', prevSlide);
+
+    function toggleNotes() {
+      isNotesOpen = !isNotesOpen;
+      if (isNotesOpen) {
+        notesPanel.classList.remove('translate-x-full');
+      } else {
+        notesPanel.classList.add('translate-x-full');
+      }
+    }
+
+    btnNotes.addEventListener('click', toggleNotes);
+    btnCloseNotes.addEventListener('click', () => {
+      isNotesOpen = false;
+      notesPanel.classList.add('translate-x-full');
+    });
+
+    const shortcutsModal = document.getElementById('shortcuts-modal');
+    const btnHelp = document.getElementById('btn-help');
+    const btnCloseShortcuts = document.getElementById('btn-close-shortcuts');
+    const btnOkShortcuts = document.getElementById('btn-ok-shortcuts');
+
+    function openShortcuts() {
+      shortcutsModal.classList.remove('hidden');
+      setTimeout(() => shortcutsModal.classList.remove('opacity-0'), 10);
+    }
+
+    function closeShortcuts() {
+      shortcutsModal.classList.add('opacity-0');
+      setTimeout(() => shortcutsModal.classList.add('hidden'), 150);
+    }
+
+    btnHelp.addEventListener('click', openShortcuts);
+    btnCloseShortcuts.addEventListener('click', closeShortcuts);
+    btnOkShortcuts.addEventListener('click', closeShortcuts);
+
+    const btnFullscreen = document.getElementById('btn-fullscreen');
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(() => {});
+      } else {
+        if (document.exitFullscreen) document.exitFullscreen();
+      }
+    }
+    btnFullscreen.addEventListener('click', toggleFullscreen);
+
+    window.addEventListener('keydown', (e) => {
+      if (['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) return;
+
+      switch(e.key) {
+        case 'ArrowRight':
+        case 'ArrowDown':
+        case ' ':
+        case 'PageDown':
+          e.preventDefault();
+          nextSlide();
+          break;
+        case 'ArrowLeft':
+        case 'ArrowUp':
+        case 'Backspace':
+        case 'PageUp':
+          e.preventDefault();
+          prevSlide();
+          break;
+        case 'Home':
+          e.preventDefault();
+          goToSlide(1);
+          break;
+        case 'End':
+          e.preventDefault();
+          goToSlide(totalSlides);
+          break;
+        case 'f':
+        case 'F':
+          e.preventDefault();
+          toggleFullscreen();
+          break;
+        case 'p':
+        case 'P':
+          e.preventDefault();
+          toggleNotes();
+          break;
+        case '?':
+          e.preventDefault();
+          openShortcuts();
+          break;
+        case 'Escape':
+          if (isNotesOpen) {
+            isNotesOpen = false;
+            notesPanel.classList.add('translate-x-full');
+          }
+          closeShortcuts();
+          break;
+      }
+    });
+
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    window.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    window.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      const distance = touchEndX - touchStartX;
+      if (Math.abs(distance) > 50) {
+        if (distance < 0) nextSlide();
+        else prevSlide();
+      }
+    }, { passive: true });
+
+    updateSlideUI();
+  </script>
+</body>
+</html>
