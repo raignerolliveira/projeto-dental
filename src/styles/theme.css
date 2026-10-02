@@ -1,0 +1,19 @@
+:root {
+  --brand-primary: #542B4B;
+  --brand-primary-hover: #401F39;
+  --brand-secondary: #9B4587;
+  --brand-secondary-hover: #833971;
+  --brand-accent: #CC6EAB;
+  --brand-accent-hover: #B85997;
+  --brand-soft: #FCD5F4;
+  --brand-soft-light: #FDF2FA;
+  --brand-surface: #FFFFFF;
+}
+
+@layer base {
+  body {
+    background-color: #F9FAFB;
+    color: #1F2937;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  }
+}

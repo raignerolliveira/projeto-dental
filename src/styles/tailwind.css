@@ -1,0 +1,14 @@
+@import 'tailwindcss';
+@source '../**/*.{js,ts,jsx,tsx}';
+
+@theme {
+  --color-brand-primary: #542B4B;
+  --color-brand-primary-hover: #401F39;
+  --color-brand-secondary: #9B4587;
+  --color-brand-secondary-hover: #833971;
+  --color-brand-accent: #CC6EAB;
+  --color-brand-accent-hover: #B85997;
+  --color-brand-soft: #FCD5F4;
+  --color-brand-soft-light: #FDF2FA;
+  --color-brand-surface: #FFFFFF;
+}
